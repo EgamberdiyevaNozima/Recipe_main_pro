@@ -1,8 +1,5 @@
 import 'package:equatable/equatable.dart';
-
-import '../../../data/models/top_chef_model.dart';
-
-enum TopChefsStatus { idle, loading, success, error }
+import '../../../data/models/top_chef_model.dart';enum TopChefsStatus { idle, loading, success, error }
 
 class TopChefsState extends Equatable {
   final List<TopChefModel> mostViewedChefs;

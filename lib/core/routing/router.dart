@@ -92,10 +92,10 @@ final router = GoRouter(
       ),
     ),
 
-    GoRoute(
-      path: Routes.topChef,
-      builder: (context, state) => TopChefsView(),
-    ),
+    // GoRoute(
+    //   path: Routes.topChef,
+    //   builder: (context, state) => TopChefsView(),
+    // ),
 
 
 

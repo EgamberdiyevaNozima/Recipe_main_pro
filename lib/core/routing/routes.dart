@@ -7,6 +7,8 @@ class Routes {
   static const String reviews = '/reviews/:recipeId';
   static const String createReview = '/create-review/:recipeId';
   static const topChef = "/topChef";
+  // static const topChefProfile = "/topChefProfile";
+
   static String getRecipeDetail(int recipeId) => '/recipe-detail/$recipeId';
 
   static String getCategoryDetail(int categoryId) => '/category-detail/$categoryId';

@@ -1,42 +1,35 @@
 // import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:recipe_project_0/core/client.dart';
+// import 'package:recipe_project_0/features/top_chef/manager/top_chef_events.dart';
 //
+// import '../../../data/repositories/chef_repository.dart';
 // import 'chef_manager.dart';
 //
-// // Bloc Events
-// abstract class ChefEvent {}
-// class FetchChefsEvent extends ChefEvent {}
+// // part 'top_chefs_events.dart';
 //
-// // Bloc States
-// abstract class ChefState {}
-// class ChefLoadingState extends ChefState {}
-// class ChefLoadedState extends ChefState {
-//   final List<Chef> mostViewedChefs;
-//   final List<Chef> mostLikedChefs;
-//   final List<Chef> newChefs;
+// class TopChefsBloc extends Bloc<TopChefsEvent, TopChefsState> {
+//   TopChefsBloc({required ChefRepository chefRepo})
+//       : _chefRepo = chefRepo,
+//         super(TopChefsState.initial()) {
+//     on<TopChefsLoading>(_onLoad);
+//     add(TopChefsLoading());
+//   }
 //
-//   ChefLoadedState({required this.mostViewedChefs, required this.mostLikedChefs, required this.newChefs});
-// }
-// class ChefErrorState extends ChefState {
-//   final String message;
-//   ChefErrorState(this.message);
-// }
+//   final ChefRepository _chefRepo;
 //
-// // Bloc Class
-// class ChefBloc extends Bloc<ChefEvent, ChefState> {
-//   final ApiClient apiClient;
+//   Future<void> _onLoad(TopChefsLoading event, Emitter<TopChefsState> emit) async {
+//     emit(
+//       state.copyWith(
+//         mostViewedChefsStatus: TopChefsStatus.loading,
+//         mostLikedChefsStatus: TopChefsStatus.loading,
+//         newChefsStatus: TopChefsStatus.loading,
+//       ),
+//     );
 //
-//   ChefBloc({required this.apiClient}) : super(ChefLoadingState()) {
-//     on<FetchChefsEvent>((event, emit) async {
-//       try {
-//         final mostViewed = await apiClient.getChefs("most_viewed");
-//         final mostLiked = await apiClient.getChefs("most_liked");
-//         final newChefs = await apiClient.getChefs("new_chefs");
-//
-//         emit(ChefLoadedState(mostViewedChefs: mostViewed, mostLikedChefs: mostLiked, newChefs: newChefs));
-//       } catch (e) {
-//         emit(ChefErrorState("Failed to load chefs: ${e.toString()}"));
-//       }
-//     });
+//     final mostViewedChefs = await _chefRepo.fetchMostViewedChefs();
+//     emit(state.copyWith(mostViewedChefs: mostViewedChefs, mostViewedChefsStatus: TopChefsStatus.success));
+//     final mostLikedChefs = await _chefRepo.fetchMostLikedChefs();
+//     emit(state.copyWith(mostLikedChefs: mostLikedChefs, mostLikedChefsStatus: TopChefsStatus.success));
+//     final newChefs = await _chefRepo.fetchNewChefs();
+//     emit(state.copyWith(newChefs: newChefs, newChefsStatus: TopChefsStatus.success));
 //   }
 // }

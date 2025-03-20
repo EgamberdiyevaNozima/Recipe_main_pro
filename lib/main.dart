@@ -40,18 +40,11 @@ import 'package:provider/provider.dart';
 import 'core/dependencies.dart';
 import 'core/routing/router.dart';
 import 'core/utils/themes.dart';
-state & behavior
-state alohida bo'lib ajraladi
-Cubit, state, emit
-Equatable, immutable
-part of, part
-BlocBuilder, BlocSelector, BlocListener
-BlocProvider
-RepositoryProvider
-*/
+import 'features/top_chef/manager/chef_manager.dart';
+import 'features/top_chef/pages/top_chef_page.dart';
+import 'features/top_chef_profile/widgets/top_chef_profiles.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  // App full-screen bo'lib run bo'lishi uchun!
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   runApp(RecipeApp());
 }
@@ -71,9 +64,11 @@ class RecipeApp extends StatelessWidget {
     //     darkTheme: AppThemes.darkTheme,
     //   ),
     // );
-    //}
+    // }
     return MaterialApp(
-      home: TopChefPage(),
+      debugShowCheckedModeBanner: false,
+      home: TopChefProfile(),
     );
   }
+
 }
